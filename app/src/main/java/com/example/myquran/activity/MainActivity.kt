@@ -24,30 +24,36 @@ class MainActivity : AppCompatActivity() {
     private fun initial() {
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
-        bottomNavigationView.setOnNavigationItemReselectedListener {
+        bottomNavigationView.setOnNavigationItemSelectedListener {
             showFragment(it.itemId)
         }
     }
 
-    private fun showFragment(it: Int) {
-        var ft : FragmentTransaction = supportFragmentManager.beginTransaction();
+    private fun showFragment(it: Int) : Boolean {
+        var ft = supportFragmentManager.beginTransaction();
         var view : Int = R.id.app_main;
         when(it) {
             R.id.menu_home -> {
                 ft.replace(view, HomeFragment())
+                true
             }
             R.id.menu_alquran -> {
                 ft.replace(view, AlQuranFragment())
+                true
             }
             R.id.menu_sholat -> {
                 ft.replace(view, SholatFragment())
+                true
             }
             R.id.menu_user -> {
                 ft.replace(view, ProfileFragment())
+                true
             } else -> {
                 ft.replace(view, HomeFragment());
+                true
             }
         }
         ft.commit();
+        return true
     }
 }
